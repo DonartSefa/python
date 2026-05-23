@@ -1,0 +1,33 @@
+import pandas as pd
+import streamlit as st
+import plotly.express as px
+#
+# df = pd.DataFrame({
+#     'Name': ['Donart','Diar','Festa'],
+#     'Age':[17,18,21],
+#     'City':['Vranjefc City038 ⚠️','Kolovica City☠️','Vushtrri☕︎']
+# })
+#
+# df
+
+books_df = pd.read_csv("eda-amazon-top-50-bestselling-books.csv")
+
+st.title("Bestselling books in Amazon")
+st.write("This app analyzes the Amazon topselling books")
+
+
+st.subheader("Summaty Statisstics")
+total_books = books_df.shape[0]
+unique_titles = books_df['Name']
+avg_rating = books_df["User Rating"]
+avg_price = books_df['Price']
+
+
+col1,col2,col3,col4 = st.columns(4)
+col1.metric("Total books", total_books)
+col2.metric("Unique Titles" ,unique_titles)
+col3.metric("Average Rating",avg_rating)
+col4.metric("Average Price",avg_price)
+
+st.subheader("Dataset Preview")
+st.write(books_df.head())
